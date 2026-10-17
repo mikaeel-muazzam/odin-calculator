@@ -51,19 +51,37 @@ function operate(operandA, operandB, operator) {
     return result;
 }
 
+function calculate(operand) {
+    //check if there is already an operandA
+    if(operandA) operandB = operand;
+    else operandA = operand;
+
+    //operate if all three inputs exist
+    if(operandA && operandB && operator) {
+       result = operate(operandA, operandB, operator);
+       display.textContent = result;
+       operandA = result;
+       operandB = undefined;
+    }
+}
+
 function buttonClicked(event) {
     const input = event.target.id;
+    let operand;
+    display.textContent = input;
     console.log(`${input} clicked, which is ${Number(input)}`);
 
+    //check if button was a number or an operator
     if(isNaN(Number(input))) operator = input;
-    else operandA = Number(input);
+    else operand = Number(input);
 
-    display.textContent = input;
+    calculate(operand)
 }
 
 let operandA;
 let operandB;
 let operator;
+let result;
 
 const display = document.querySelector(".display")
 const buttons = document.querySelectorAll("button");
