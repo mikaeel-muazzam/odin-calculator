@@ -52,12 +52,19 @@ function operate(operandA, operandB, operator) {
 }
 
 function buttonClicked(event) {
-    console.log(`${event.target.id} clicked`);
+    const input = event.target.id;
+    console.log(`${input} clicked, which is ${Number(input)}`);
+
+    if(isNaN(Number(input))) operator = input;
+    else operandA = Number(input);
+
+    display.textContent = input;
 }
 
 let operandA;
 let operandB;
 let operator;
 
+const display = document.querySelector(".display")
 const buttons = document.querySelectorAll("button");
 buttons.forEach(button => button.addEventListener("click", buttonClicked))
