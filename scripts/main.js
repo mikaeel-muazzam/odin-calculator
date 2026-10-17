@@ -75,7 +75,7 @@ function buttonClicked(event) {
     if(isNaN(Number(input))) operator = input;
     else operand = Number(input);
 
-    calculate(operand)
+    calculate(operand);
 }
 
 let operandA;
