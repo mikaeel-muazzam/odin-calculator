@@ -17,6 +17,9 @@ function multiply(operandA, operandB) {
 }
 
 function divide(operandA, operandB) {
+    if(operandB === 0) {
+        return "no";
+    }
     const operation = "division";
     console.log(`Performing ${operation} on ${operandA} and ${operandB}`)
     return operandA / operandB;
@@ -69,7 +72,7 @@ function calculate(operand) {
        display.textContent = result;
        operandA = result;
        operandB = undefined;
-    //    operator = undefined;
+       operator = undefined;
     }
 
     operandN = "";
