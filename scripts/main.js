@@ -31,6 +31,7 @@ function testAll() {
 
 function operate(operandA, operandB, operator) {
     let result;
+    //switch between +, -, *, and / to add, subtract, multiply, and divide
     switch (operator) {
         case "+":
             result = add(operandA, operandB);
