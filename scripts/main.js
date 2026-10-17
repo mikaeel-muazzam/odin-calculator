@@ -22,11 +22,13 @@ function divide(operandA, operandB) {
     return operandA / operandB;
 }
 
-function testAll() {
-    console.log(add(1, 2));
-    console.log(subtract(3, 4));
-    console.log(multiply(5, 6));
-    console.log(divide(7, 8));
+function clear() {
+    console.log("CLEARING");
+    operandA = undefined;
+    operandB = undefined;
+    operandN = "";
+    operator = undefined;
+    display.textContent = defaultText;
 }
 
 function operate(operandA, operandB, operator) {
@@ -36,15 +38,19 @@ function operate(operandA, operandB, operator) {
         case "+":
             result = add(operandA, operandB);
             break;
+
         case "-":
             result = subtract(operandA, operandB);
             break;
+
         case "*":
             result = multiply(operandA, operandB);
             break;
+
         case "/":
             result = divide(operandA, operandB);
             break;
+
         default:
             result = "ERROR";
     }
@@ -52,6 +58,7 @@ function operate(operandA, operandB, operator) {
 }
 
 function calculate(operand) {
+    console.log("calculating...")
     //check if there is already an operandA
     if(operandA) operandB = operand;
     else operandA = operand;
@@ -62,22 +69,50 @@ function calculate(operand) {
        display.textContent = result;
        operandA = result;
        operandB = undefined;
+       operator = undefined;
     }
+
+    operandN = "";
 }
 
 function buttonClicked(event) {
     const input = event.target.id;
+
+    //validation and guard clauses
+    if(!(input)) return;
+    if(input === "AC") {
+        clear();
+        return;
+    }
+
     let operand;
+
     display.textContent = input;
     console.log(`${input} clicked, which is ${Number(input)}`);
 
     //check if button was a number or an operator
-    if(isNaN(Number(input))) operator = input;
-    else operand = Number(input);
+    // if(isNaN(Number(input))) operator = input;
+    // else operand = Number(input);
+    // calculate(operand);
 
-    calculate(operand);
+    // if input is a number, then append to whichever operand
+    if(!(isNaN(Number(input)))) {
+        operandN += input;
+        display.textContent = operandN;
+        return;
+    }
+
+    if(!(operator)) operator = input;
+
+    if(input === "=") {
+        calculate(Number(operandN));
+    } else {
+        calculate(Number(operandN));
+    }
 }
 
+const defaultText = "Press a button..."
+let operandN = "";
 let operandA;
 let operandB;
 let operator;
