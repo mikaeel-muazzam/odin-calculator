@@ -1,5 +1,3 @@
-console.log("Hello world");
-
 function add(operandA, operandB) {
     const operation = "addition";
     console.log(`Performing ${operation} on ${operandA} and ${operandB}`)
@@ -30,3 +28,28 @@ function testAll() {
     console.log(multiply(5, 6));
     console.log(divide(7, 8));
 }
+
+function operate(operandA, operandB, operator) {
+    let result;
+    switch (operator) {
+        case "+":
+            result = add(operandA, operandB);
+            break;
+        case "-":
+            result = subtract(operandA, operandB);
+            break;
+        case "*":
+            result = multiply(operandA, operandB);
+            break;
+        case "/":
+            result = divide(operandA, operandB);
+            break;
+        default:
+            result = "ERROR";
+    }
+    return result;
+}
+
+let operandA;
+let operandB;
+let operator;
