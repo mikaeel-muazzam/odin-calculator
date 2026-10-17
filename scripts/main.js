@@ -69,7 +69,7 @@ function calculate(operand) {
        display.textContent = result;
        operandA = result;
        operandB = undefined;
-       operator = undefined;
+    //    operator = undefined;
     }
 
     operandN = "";
@@ -90,11 +90,6 @@ function buttonClicked(event) {
     display.textContent = input;
     console.log(`${input} clicked, which is ${Number(input)}`);
 
-    //check if button was a number or an operator
-    // if(isNaN(Number(input))) operator = input;
-    // else operand = Number(input);
-    // calculate(operand);
-
     // if input is a number, then append to whichever operand
     if(!(isNaN(Number(input)))) {
         operandN += input;
@@ -104,11 +99,7 @@ function buttonClicked(event) {
 
     if(!(operator)) operator = input;
 
-    if(input === "=") {
-        calculate(Number(operandN));
-    } else {
-        calculate(Number(operandN));
-    }
+    calculate(Number(operandN));
 }
 
 const defaultText = "Press a button..."
