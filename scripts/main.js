@@ -51,6 +51,13 @@ function operate(operandA, operandB, operator) {
     return result;
 }
 
+function buttonClicked(event) {
+    console.log(`${event.target.id} clicked`);
+}
+
 let operandA;
 let operandB;
 let operator;
+
+const buttons = document.querySelectorAll("button");
+buttons.forEach(button => button.addEventListener("click", buttonClicked))
