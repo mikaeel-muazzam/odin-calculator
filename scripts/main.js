@@ -61,7 +61,8 @@ function operate(operandA, operandB, operator) {
 }
 
 function updateVars (result) {
-    display.textContent = result;
+    if (result != result.toFixed(0)) display.textContent = result.toFixed(4);
+    else display.textContent = result; 
     operandA = result;
     operandB = undefined;
 }
