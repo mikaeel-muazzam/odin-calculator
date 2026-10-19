@@ -18,7 +18,7 @@ function multiply(operandA, operandB) {
 
 function divide(operandA, operandB) {
     if(operandB === 0) {
-        return "no";
+        return "Thought ya could get away with it?";
     }
     const operation = "division";
     console.log(`Performing ${operation} on ${operandA} and ${operandB}`)
@@ -61,10 +61,16 @@ function operate(operandA, operandB, operator) {
 }
 
 function updateVars (result) {
-    if (result != result.toFixed(0)) display.textContent = result.toFixed(4);
-    else display.textContent = result; 
-    operandA = result;
-    operandB = undefined;
+    if (isNaN(Number(result))) {
+        display.textContent = result;
+        operandA = undefined;
+        operandB = undefined;
+    }
+    else {
+        display.textContent = (result != result.toFixed(0)) ? display.textContent = result.toFixed(4) : display.textContent = result;
+        operandA = result;
+        operandB = undefined;
+    }
 }
 
 function numberPressed(input) {
@@ -79,7 +85,7 @@ function operatorPressed(input) {
     else operandA = Number(num);
     display.textContent = input;
     num = "";
-    if (operandA && operandB) operate(operandA, operandB, operator);
+    if ((operandA || operandA === 0) && (operandB || operandB === 0)) operate(operandA, operandB, operator);
     operator = input;
 }
 
@@ -87,7 +93,7 @@ function equalPressed() {
     console.log(`Equals to pressed`);
     if (operandA) operandB = Number(num);
     num = "";
-    if (operandA && operandB && operator) operate(operandA, operandB, operator);
+    if ((operandA || operandA === 0) && (operandB || operandB === 0) && operator) operate(operandA, operandB, operator);
 }
 
 function deletePressed(input) {
