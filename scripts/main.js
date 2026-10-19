@@ -27,9 +27,9 @@ function divide(operandA, operandB) {
 
 function clear() {
     console.log("CLEARING");
+    num = "";
     operandA = undefined;
     operandB = undefined;
-    operandN = "";
     operator = undefined;
     display.textContent = defaultText;
 }
@@ -57,59 +57,61 @@ function operate(operandA, operandB, operator) {
         default:
             result = "ERROR";
     }
-    return result;
+    updateVars(result);
 }
 
-function calculate(operand) {
-    console.log("calculating...")
-    //check if there is already an operandA
-    if(operandA) operandB = operand;
-    else operandA = operand;
+function updateVars (result) {
+    display.textContent = result;
+    operandA = result;
+    operandB = undefined;
+}
 
-    //operate if all three inputs exist
-    if(operandA && operandB && operator) {
-       result = operate(operandA, operandB, operator);
-       display.textContent = result;
-       operandA = result;
-       operandB = undefined;
-       operator = undefined;
-    }
+function numberPressed(input) {
+    console.log(`Number ${input} pressed`);
+    num += input;
+    display.textContent = num;
+}
 
-    operandN = "";
+function operatorPressed(input) {
+    console.log(`Operator ${input} pressed`);
+    if (operandA) operandB = Number(num);
+    else operandA = Number(num);
+    display.textContent = input;
+    num = "";
+    if (operandA && operandB) operate(operandA, operandB, operator);
+    operator = input;
+}
+
+function equalPressed() {
+    console.log(`Equals to pressed`);
+    if (operandA) operandB = Number(num);
+    num = "";
+    if (operandA && operandB && operator) operate(operandA, operandB, operator);
+}
+
+function deletePressed(input) {
+    console.log(`Deletor ${input} pressed`);
+    if (input === "AC") clear();
 }
 
 function buttonClicked(event) {
     const input = event.target.id;
+    console.log(`${input} pressed`);
 
-    //validation and guard clauses
-    if(!(input)) return;
-    if(input === "AC") {
-        clear();
-        return;
-    }
-
-    let operand;
-
-    display.textContent = input;
-    console.log(`${input} clicked, which is ${Number(input)}`);
-
-    // if input is a number, then append to whichever operand
-    if(!(isNaN(Number(input)))) {
-        operandN += input;
-        display.textContent = operandN;
-        return;
-    }
-
-    if(!(operator)) operator = input;
-
-    calculate(Number(operandN));
+    if (!input) return;
+    else if (!isNaN(Number(input))) numberPressed(input);
+    else if (input === '=') equalPressed();
+    else if (input === 'AC' || input === 'DEL') deletePressed(input);
+    else operatorPressed(input);
 }
 
 const defaultText = "Press a button..."
-let operandN = "";
+
+let num = "";
 let operandA;
 let operandB;
 let operator;
+
 let result;
 
 const display = document.querySelector(".display")
